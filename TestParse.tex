@@ -1,0 +1,106 @@
+%% LyX 2.0.0 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=1cm,bmargin=1cm,lmargin=1cm,rmargin=1cm}
+\usepackage{calc}
+\usepackage{amsmath}
+\usepackage{esint}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\part*{Part 1}
+
+
+\section*{Section 1}
+
+
+\subsection*{Subsection 1}
+
+
+\paragraph*{Paragraph 1}
+
+Standard
+
+\begin{eqnarray*}
+\int_{-\infty}^{\infty}x^{2}dx & = & \infty\\
+\\
+\begin{bmatrix}\frac{f(x,t)}{x} & \frac{f\left(x,t\right)}{x+\Delta x}\\
+\frac{f\left(x,t\right)}{t} & \frac{f\left(x,t\right)}{t+\Delta t}
+\end{bmatrix} & = & \frac{\delta f\left(x,t\right)}{\delta x},\frac{\delta f\left(x,t\right)}{\delta t}
+\end{eqnarray*}
+
+
+\textbf{This is bold. }\emph{This is emphasis}. 
+\begin{itemize}
+\item Bullet 1
+\item Bullet 2
+\end{itemize}
+$\begin{pmatrix}3 & 4 & 5\\
+6 & 7 & 8\\
+9 & 10 & 11
+\end{pmatrix}\rightarrow\begin{cases}
+\mbox{Inline Math}\\
+\mbox{Cases}
+\end{cases}$
+
+Inline case number 2: $\int_{-\gamma}^{\rho}dx=24x^{2}$
+
+\framebox{\begin{minipage}[t]{1\columnwidth}%
+for shits and giggles, a box! 
+\[
+x^{2}=3-x
+\]
+%
+\end{minipage}}
+
+\begin{table}
+\caption{This is the title of Table 1}
+
+
+\begin{tabular}{|c|c|c|c|}
+\hline 
+1x1\&4 & 1x2 & 1x3 & 1x4\tabularnewline
+\hline 
+\hline 
+2x1 & 2x2 & 2x3 & 2x4\tabularnewline
+\hline 
+3x1 & 3x2 & 3x3 & 3x4\tabularnewline
+\hline 
+$4x1:\int x^{2}dx$ &  &  & \tabularnewline
+\hline 
+ &  &  & \tabularnewline
+\hline 
+ &  &  & \tabularnewline
+\hline 
+\end{tabular}
+\end{table}
+
+
+\begin{tabular}{|c|c|c|}
+\hline 
+tabular table? &  & \tabularnewline
+\hline 
+\hline 
+ &  & \tabularnewline
+\hline 
+ &  & \tabularnewline
+\hline 
+ &  & \tabularnewline
+\hline 
+\end{tabular}
+
+! @ \# \$ \% \textasciicircum{} \& {*} ( ) \_ - + = {[} \{ {]} \}
+\textbackslash{} | ? > < \textasciitilde{} `
+\end{document}

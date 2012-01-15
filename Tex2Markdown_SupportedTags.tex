@@ -1,0 +1,150 @@
+%% LyX 2.0.0 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=1cm,bmargin=1cm,lmargin=1cm,rmargin=1cm}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\subsection*{Conversion Set A: replace and wrap, 0 or more {*}'s}
+
+\textbf{General: }\LaTeX{}\_tag\{\emph{text}\} $\rightarrow$\emph{
+}Markdown\_tag\emph{text}Markdown\_tag OR \LaTeX{}\_tag{*}\{\emph{text}\}
+$\rightarrow$\emph{ }Markdown\_tag\emph{text}Markdown\_tag OR 
+
+\textbf{Example:} \textbackslash{}part\{\emph{text}\} $\rightarrow$
+\#\emph{text}\# OR\textbackslash{}part{*}\{\emph{text}\} $\rightarrow$
+\#\emph{text}\#
+
+\begin{tabular}{|c|c|c|}
+\hline 
+\LaTeX{}\_tag & Markdown\_tag & Comments\tabularnewline
+\hline 
+\hline 
+part & \# & \tabularnewline
+\hline 
+section & \#\# & \tabularnewline
+\hline 
+subsection & \#\#\# & \tabularnewline
+\hline 
+paragraph & \#\#\#\# & \tabularnewline
+\hline 
+textbf & {*}{*} & \tabularnewline
+\hline 
+emph & {*} & \tabularnewline
+\hline 
+caption & {*} & Arbitrary superset decision - captions not supported in Markdown\tabularnewline
+\hline 
+\end{tabular}
+
+
+\subsection*{Conversion Set B: begin/end insertion}
+
+\textbf{General: }\textbackslash{}begin\{\LaTeX{}\_tag\} \emph{text
+}\textbackslash{}end\{\LaTeX{}\_tag\} $\rightarrow$ Markdown\_tag\textbackslash{}begin\{\LaTeX{}\_tag\}
+\emph{text }\textbackslash{}end\{\LaTeX{}\_tag\}Markdown\_tag
+
+\textbf{Example:} \textbackslash{}begin\{eqnarray\} \emph{text }\textbackslash{}end\{eqnarray\}
+$\rightarrow$ \$\$\textbackslash{}begin\{eqnarray\} \emph{text }\textbackslash{}end\{eqnarray\}\$\$
+
+\begin{tabular}{|c|c|c|}
+\hline 
+\LaTeX{}\_tag & Markdown\_tag & Comments\tabularnewline
+\hline 
+\hline 
+eqnarray & \$\$ & MathJax syntax\tabularnewline
+\hline 
+\end{tabular}
+
+
+\subsection*{Conversion Set C: find and replace}
+
+\textbf{General: }\LaTeX{}\_tag $\rightarrow$ Markdown\_tag
+
+\textbf{Example: }\textbackslash{}item $\rightarrow$ {*}
+
+\begin{tabular}{|c|c|c|}
+\hline 
+\LaTeX{}\_tag & Markdown\_tag & Comments\tabularnewline
+\hline 
+\hline 
+\textbackslash{}item & {*} & \tabularnewline
+\hline 
+\textbackslash{}begin\{itemize\} &  & i.e. remove the \LaTeX{}\_tag\tabularnewline
+\hline 
+\textbackslash{}end\{itemize\} &  & i.e. remove the \LaTeX{}\_tag\tabularnewline
+\hline 
+\textbackslash{}begin\{tabular\} &  & i.e. remove the \LaTeX{}\_tag\tabularnewline
+\hline 
+\textbackslash{}end\{tabular\} &  & \tabularnewline
+\hline 
+\textbackslash{}begin\{minipage\} & \textbackslash{}n{*}{*}{*}\textbackslash{}n & \tabularnewline
+\hline 
+\textbackslash{}end\{minipage\} & \textbackslash{}n{*}{*}{*}\textbackslash{}n & \tabularnewline
+\hline 
+\textbackslash{}framebox\{ &  & \tabularnewline
+\hline 
+\textbackslash{}\& & \& & \tabularnewline
+\hline 
+/\# & \# & \tabularnewline
+\hline 
+/\$ & \$ & \tabularnewline
+\hline 
+/\% & \% & \tabularnewline
+\hline 
+\textbackslash{}textasciicircum\{\} & \textasciicircum{} & \tabularnewline
+\hline 
+\{{*}\} & {*} & \tabularnewline
+\hline 
+\textbackslash{}\_ & \_ & \tabularnewline
+\hline 
+\{{[}\} & {[} & \tabularnewline
+\hline 
+\{{]}\} & {]} & \tabularnewline
+\hline 
+\textbackslash{}\{ & \{ & \tabularnewline
+\hline 
+\textbackslash{}\} & \} & \tabularnewline
+\hline 
+\textbackslash{}textbackslash\{\} & \textbackslash{}\textbackslash{} & \tabularnewline
+\hline 
+\textbackslash{}textasciitilde\{\} & \textasciitilde{} & \tabularnewline
+\hline 
+\end{tabular}
+
+
+\subsection*{Conversion Set D: Environment Specific Find and Replace}
+
+\textbf{General: }\textbackslash{}begin\{\LaTeX{}\_environment\} \emph{text
+}\LaTeX{}\_tag \emph{text }\textbackslash{}end\{\LaTeX{}\_environment\}
+$\rightarrow$ \textbackslash{}begin\{\LaTeX{}\_environment\} \emph{text
+}Markdown\_tag \emph{text }\textbackslash{}end\{\LaTeX{}\_environment\}
+
+\begin{tabular}{|c|c|c|c|}
+\hline 
+\LaTeX{}\_environment & \LaTeX{}\_tag & Markdown\_tag & Comments\tabularnewline
+\hline 
+\hline 
+tabular & 1st: \textbackslash{}hline &  & only the first hline\tabularnewline
+\hline 
+tabular & 2nd: \textbackslash{}hline & ----|---- & \# of |'s depend on \# of columns, i.e. \# of c's in \{c|c|c|c\} expression\tabularnewline
+\hline 
+tabular & rest: \textbackslash{}hline \textbackslash{}n &  & i.e. remove the \LaTeX{}\_tag\tabularnewline
+\hline 
+tabular & \&$ $ & | & i.e. remove the \LaTeX{}\_tag\tabularnewline
+\hline 
+\textbackslash{}tabularnewline &  &  & Whenever $\exists$ \textbackslash{}hline, there $\exists$ \textbackslash{}tabularnewline\tabularnewline
+\hline 
+\end{tabular}
+\end{document}
