@@ -20,31 +20,38 @@
 \subsection*{Conversion Set A: replace and wrap, 0 or more {*}'s}
 
 \textbf{General: }\LaTeX{}\_tag\{\emph{text}\} $\rightarrow$\emph{
-}Markdown\_tag\emph{text}Markdown\_tag OR \LaTeX{}\_tag{*}\{\emph{text}\}
-$\rightarrow$\emph{ }Markdown\_tag\emph{text}Markdown\_tag OR 
+}Markdown\_tag\emph{\_lefttext}Markdown\_tag\_right OR \LaTeX{}\_tag{*}\{\emph{text}\}
+$\rightarrow$\emph{ }Markdown\_tag\emph{\_lefttext}Markdown\_tag\_right
+OR 
 
 \textbf{Example:} \textbackslash{}part\{\emph{text}\} $\rightarrow$
-\#\emph{text}\# OR\textbackslash{}part{*}\{\emph{text}\} $\rightarrow$
-\#\emph{text}\#
+\emph{\$text}\# OR\textbackslash{}part{*}\{\emph{text}\} $\rightarrow$
+\$\emph{text}\#
 
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|c|c|c|c|}
 \hline 
-\LaTeX{}\_tag & Markdown\_tag & Comments\tabularnewline
+\LaTeX{}\_tag & Markdown\_tag\_left & Markdown\_tag\_left & Comments\tabularnewline
 \hline 
 \hline 
-part & \# & \tabularnewline
+part & \#  & \# & $\exists$ a space after Markdown\_tag\_left\tabularnewline
 \hline 
-section & \#\# & \tabularnewline
+section & \#\#  & \#\# & $\exists$ a space after Markdown\_tag\_left\tabularnewline
 \hline 
-subsection & \#\#\# & \tabularnewline
+subsection & \#\#\#  & \#\#\# & $\exists$ a space after Markdown\_tag\_left\tabularnewline
 \hline 
-paragraph & \#\#\#\# & \tabularnewline
+subsubsection & \#\#\#\#  & \#\#\#\# & $\exists$ a space after Markdown\_tag\_left\tabularnewline
 \hline 
-textbf & {*}{*} & \tabularnewline
+paragraph & \#\#\#\#\#  & \#\#\#\#\# & $\exists$ a space after Markdown\_tag\_left\tabularnewline
 \hline 
-emph & {*} & \tabularnewline
+textbf & {*}{*} & {*}{*} & \tabularnewline
 \hline 
-caption & {*} & Arbitrary superset decision - captions not supported in Markdown\tabularnewline
+emph & {*} & {*} & \tabularnewline
+\hline 
+caption & {*} & {*} & Arbitrary superset decision - captions not supported in Markdown\tabularnewline
+\hline 
+mathmd &  &  & remove it\tabularnewline
+\hline 
+ &  &  & \tabularnewline
 \hline 
 \end{tabular}
 
@@ -120,6 +127,14 @@ eqnarray & \$\$ & MathJax syntax\tabularnewline
 \textbackslash{}textbackslash\{\} & \textbackslash{}\textbackslash{} & \tabularnewline
 \hline 
 \textbackslash{}textasciitilde\{\} & \textasciitilde{} & \tabularnewline
+\hline 
+\textbackslash{}{[} & \$\$ & \LaTeX{}'s centered equation syntax\tabularnewline
+\hline 
+\textbackslash{}{]} & \$\$ & \LaTeX{}'s centered equation syntax\tabularnewline
+\hline 
+{*}\textbackslash{}n & {*}\textbackslash{}n & where {*} is actually {[}space{]}{*}\tabularnewline
+\hline 
+ &  & \tabularnewline
 \hline 
 \end{tabular}
 

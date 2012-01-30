@@ -11,7 +11,24 @@ import os
 
 ############################### Conversion A ############################### 
 # Replace and wrap, e.g.:  \part{string} -> #string#
-def Tex2MarkDicAConv(instr, Tex2MarkDicA):
+def Tex2MarkDicAConv(instr):
+	
+	# 	Tex 2 Markdown Dictionary A:
+	#	replace, eg, \part{str} with #str#
+	# 	i.e. keyword at begining and brackets surrounding string, ...
+	# 	and replace with keywords surrounding string
+	Tex2MarkDicA = {'part': ['# ','#'],		\
+					'section': ['## ','##'],	\
+					'subsection': ['### ','###'],\
+					'subsubsection': ['#### ','####'],\
+					'paragraph': ['##### ','#####'],\
+					'textbf': ['**','**'],\
+					'emph': ['*','*'],\
+					'caption': ['*','*'], \
+					'textmd': ['','']\
+					}
+
+
 	outstr = instr
 	for t,m in Tex2MarkDicA.iteritems():
 		p = re.compile( "\\\\" + t	+		# match tex tag, e.g. \part...
@@ -22,14 +39,20 @@ def Tex2MarkDicAConv(instr, Tex2MarkDicA):
 										# ( ) is group notation, used below
 					re.DOTALL | re.VERBOSE)		# re.DOTALL: incl newline with (.)
 		# perform t2m replace, eg \part{str} to #{str}#
-		outstr = p.sub(m + '\\1' + m, outstr) # where \1 pulls the text, ...
-												# (\\ needed since for raw str) ...
-												# found inside the group ( ) from above	
+		outstr = p.sub(m[0] + '\\1' + m[1], outstr) # where \1 pulls the text, ...
+													# (\\ needed since for raw str) ...
+													# found inside the group ( ) from above	
 	return outstr
 	
 ############################### Conversion B ############################### 
 # Wrap, e.g. \begin{eqnarray} string \end{eqnarray} -> $$\begin{eqnarray} string \end{eqnarray}$$
-def Tex2MarkDicBConv(instr, Tex2MarkDicB):
+def Tex2MarkDicBConv(instr):
+
+	# 	Tex 2 Markdown Dictionary B: begin/end insertion
+	#	insert, e.g., $$ around, e.g., ....
+	#	\begin{eqnarray} text \end{eqnarray}
+	Tex2MarkDicB = {'eqnarray': "$$"}
+
 	outstr = instr
 	for t,m in Tex2MarkDicB.iteritems():
 		""" Usage:
@@ -45,7 +68,43 @@ def Tex2MarkDicBConv(instr, Tex2MarkDicB):
 
 ############################### Conversion C ############################### 
 # Simple find and replace. e.g. \item -> *
-def Tex2MarkDicCConv(instr, Tex2MarkDicC):
+def Tex2MarkDicCConv(instr):
+	
+	#	Tex 2 Markdown Dictionary C: 
+	# 	Simple find and replace, ...
+	# 	e.g. \item -> * 
+	
+	# Assuming that these characters will never be written on their own ,...
+	# i.e. no one will actually write '\_' 
+	Tex2MarkDicC = {'\\item ': '* ', \
+					'\\begin{itemize}': '', \
+					'\\end{itemize}': '', \
+					'\\begin{tabular}': '', \
+					'\\end{tabular}': '' , \
+					'\\begin{table}': '', \
+					'\\end{table}': '' , \
+					'\\begin{minipage}': '\n***\n', \
+					'\\end{minipage}': '\n***\n', \
+					'\\framebox{': '', \
+					'\\&': '&', \
+					'\\#': '#', \
+					'\\$': '$', \
+					'\\%': '%', \
+					'\\textasciicircum{}': '^', \
+					'{*}': '*', \
+					'\_': '_', \
+					'{[}': '[', \
+					'{]}': ']', \
+					'\\{': '{', \
+					'\\}': '}', \
+					'\\textbackslash{}': '\\', \
+					'\\textasciitilde{}': '~',
+					'\[': '$$',\
+					'\]': '$$',\
+					' *\n': '*\n',
+					}
+
+
 	outstr = instr
 	for t,m in Tex2MarkDicC.iteritems():
 		outstr = outstr.replace(t, m)
@@ -112,7 +171,15 @@ def table_conv(instr):
 ############################### Conversion D ############################### 
 # Replace strings only if they are between \begin{environment} and \end{environment} tags
 # e.g. replace \hline with '' only if it within the \begin{tabular} and \end{environment} tags
-def Tex2MarkDicDConv(instr, Tex2MarkDicD):
+def Tex2MarkDicDConv(instr):
+	
+	#	Tex 2 Markdown Dictionary D: 
+	# 	find and replace within environments ...
+	# 	e.g. \item -> * 
+	Tex2MarkDicD = {'tabular': {'\\tabularnewline': '', \
+								}
+					}
+
 	for t,m in Tex2MarkDicD.iteritems():
 		## split text into segments containing or not containing tables
 		penv = re.compile("""
@@ -144,70 +211,13 @@ def Tex2MarkDicDConv(instr, Tex2MarkDicD):
 ####################################################################################
 
 
-############################ Conversion Dictionaries ############################### 
-# 	Tex 2 Markdown Dictionary A:
-#	replace, eg, \part{str} with #str#
-# 	i.e. keyword at begining and brackets surrounding string, ...
-# 	and replace with keywords surrounding string
-Tex2MarkDicA = {'part': '#',		\
-				'section': '##',	\
-				'subsection': '###',\
-				'paragraph': '####',\
-				'textbf': '**',\
-				'emph': '*',\
-				'caption': '*', \
-				}
-
-# 	Tex 2 Markdown Dictionary B: begin/end insertion
-#	insert, e.g., $$ around, e.g., ....
-#	\begin{eqnarray} text \end{eqnarray}
-Tex2MarkDicB = {'eqnarray': "$$"}
-
-
-#	Tex 2 Markdown Dictionary C: 
-# 	Simple find and replace, ...
-# 	e.g. \item -> * 
-
-# Assuming that these characters will never be written on their own ,...
-# i.e. no one will actually write '\_' 
-Tex2MarkDicC = {'\\item ': '* ', \
-				'\\begin{itemize}': '', \
-				'\\end{itemize}': '', \
-				'\\begin{tabular}': '', \
-				'\\end{tabular}': '' , \
-				'\\begin{table}': '', \
-				'\\end{table}': '' , \
-				'\\begin{minipage}': '\n***\n', \
-				'\\end{minipage}': '\n***\n', \
-				'\\framebox{': '', \
-				'\\&': '&', \
-				'\\#': '#', \
-				'\\$': '$', \
-				'\\%': '%', \
-				'\\textasciicircum{}': '^', \
-				'{*}': '*', \
-				'\_': '_', \
-				'{[}': '[', \
-				'{]}': ']', \
-				'\\{': '{', \
-				'\\}': '}', \
-				'\\textbackslash{}': '\\', \
-				'\\textasciitilde{}': '~' \
-				}
-
-#	Tex 2 Markdown Dictionary D: 
-# 	find and replace within environments ...
-# 	e.g. \item -> * 
-Tex2MarkDicD = {'tabular': {'\\tabularnewline': '', \
-							}
-				}
-	
 ################################################################################################
 # Read  the File ###############################################################################
 ################################################################################################
-filename = raw_input("Enter tex file name: ")
+filename = sys.argv[1]
 f = open(filename)
 fstr = f.read()				#entire file is 1 string
+f.close()
 
 ################################################################################################
 # Text conversions #############################################################################
@@ -225,22 +235,25 @@ else:
 	sis.exit("Error: Found more than 1 \\begin{documents}. Quitting.")
 
 ## Step 2: 	Call the conversion methods
-markstr = Tex2MarkDicDConv(markstr, Tex2MarkDicD)
+markstr = Tex2MarkDicDConv(markstr)
 markstr = table_conv(markstr)
-markstr = Tex2MarkDicAConv(markstr, Tex2MarkDicA)
-markstr = Tex2MarkDicBConv(markstr, Tex2MarkDicB)
-markstr = Tex2MarkDicCConv(markstr, Tex2MarkDicC)
+markstr = Tex2MarkDicAConv(markstr)
+markstr = Tex2MarkDicBConv(markstr)
+markstr = Tex2MarkDicCConv(markstr)
 #markstr = Tex2MarkDicEConv(markstr)
 
 markstr = "*** \n *** \n##This text was generated using a very simple LaTeX to Markdown converter." + \
 			" Please check the text for LaTeX to Markdown translation errors before you publish. Thanks!.##" + \
 			"\n *** \n *** \n""" + markstr 
-print '###########################################################'
-print '############## LATEX2MARKDOWN CONVERSION ##################'
-print '###########################################################'
+#print '###########################################################'
+#print '############## LATEX2MARKDOWN CONVERSION ##################'
+#print '###########################################################'
 
-print markstr	
-				
+#print markstr	
+
+filename = filename[0:-4] + '.mark.txt'
+FILE = open(filename, "w")
+FILE.write(markstr)				
 					
 					
 					

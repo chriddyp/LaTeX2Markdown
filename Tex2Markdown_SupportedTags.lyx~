@@ -265,10 +265,7 @@ section
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\exists$
-\end_inset
 
- a space after Markdown_tag_left
 \end_layout
 
 \end_inset
@@ -306,10 +303,7 @@ subsection
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\exists$
-\end_inset
 
- a space after Markdown_tag_left
 \end_layout
 
 \end_inset
@@ -347,10 +341,7 @@ subsubsection
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\exists$
-\end_inset
 
- a space after Markdown_tag_left
 \end_layout
 
 \end_inset
@@ -388,10 +379,7 @@ paragraph
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\exists$
-\end_inset
 
- a space after Markdown_tag_left
 \end_layout
 
 \end_inset
