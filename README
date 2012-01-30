@@ -1,0 +1,7 @@
+A simple LaTeX2Markdown converter.
+Only tested with Lyx generated TeX files.
+Supported tags are run through their respective regular expressions.
+To add more conversion features, see if the pattern matches a regular expression
+... and if so, just add to the existing dictionary
+... if not, create another conversion function - see existing functions for help
+
